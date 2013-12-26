@@ -8,7 +8,7 @@ class School
   end
 
   def sort
-    @students.each { |grade, students| students.sort! }
+    @students.each_value(&:sort!)
     Hash[@students.sort]
   end
 
