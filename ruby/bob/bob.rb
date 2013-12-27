@@ -1,30 +1,38 @@
 class Bob
-  
+
   def hey(msg)
-    if is_yelling?(msg)
+    message = Message.new(msg)
+
+    if message.is_yelling?
       'Woah, chill out!'
-    elsif is_a_question?(msg)
+    elsif message.is_a_question?
       'Sure.'
-    elsif is_nothing?(msg)
+    elsif message.is_blank?
       'Fine. Be that way!'
     else
       'Whatever.'
     end
   end
+end
 
-  def is_yelling?(msg)
-    msg == msg.upcase && has_letters?(msg)
+class Message
+  def initialize(msg)
+    @msg = msg
   end
 
-  def is_a_question?(msg)
-    /\?\z/.match(msg)
+  def is_yelling?
+    @msg == @msg.upcase && has_letters?
   end
 
-  def has_letters?(msg)
-    /[a-zA-Z]/.match(msg)
+  def is_a_question?
+    /\?\z/.match(@msg)
   end
 
-  def is_nothing?(msg)
-    msg.empty? || /\s+\z/.match(msg)
+  def has_letters?
+    /[a-zA-Z]/.match(@msg)
+  end
+
+  def is_blank?
+    @msg.empty? || /\s+\z/.match(@msg)
   end
 end
