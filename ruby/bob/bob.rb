@@ -1,11 +1,7 @@
 class Bob
+  
   def hey(msg)
-    msg.delete!("\n")
-    response_to_message(msg)
-  end
-
-  def response_to_message(msg)
-    if is_yelling?(msg) && has_letters?(msg)
+    if is_yelling?(msg)
       'Woah, chill out!'
     elsif is_a_question?(msg)
       'Sure.'
@@ -17,18 +13,18 @@ class Bob
   end
 
   def is_yelling?(msg)
-    msg == msg.upcase
+    msg == msg.upcase && has_letters?(msg)
   end
 
   def is_a_question?(msg)
-    /\?$/.match(msg) ? true : false
+    /\?\z/.match(msg)
   end
 
   def has_letters?(msg)
-    /[a-zA-Z]/.match(msg) ? true : false
+    /[a-zA-Z]/.match(msg)
   end
 
   def is_nothing?(msg)
-    msg.empty? || /\s+$/.match(msg)
+    msg.empty? || /\s+\z/.match(msg)
   end
 end
