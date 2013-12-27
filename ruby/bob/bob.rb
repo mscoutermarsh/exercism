@@ -3,11 +3,11 @@ class Bob
   def hey(msg)
     message = Message.new(msg)
 
-    if message.is_yelling?
+    if message.yelling?
       'Woah, chill out!'
-    elsif message.is_a_question?
+    elsif message.question?
       'Sure.'
-    elsif message.is_blank?
+    elsif message.nothing?
       'Fine. Be that way!'
     else
       'Whatever.'
@@ -20,19 +20,19 @@ class Message
     @msg = msg
   end
 
-  def is_yelling?
-    @msg == @msg.upcase && has_letters?
+  def yelling?
+    @msg == @msg.upcase && letters?
   end
 
-  def is_a_question?
+  def question?
     /\?\z/.match(@msg)
   end
 
-  def has_letters?
+  def letters?
     /[a-zA-Z]/.match(@msg)
   end
 
-  def is_blank?
+  def nothing?
     @msg.empty? || /\s+\z/.match(@msg)
   end
 end
